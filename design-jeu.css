@@ -1,0 +1,64 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-135deg, red, blue);
+    font-size: 15px;
+    font-family: 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+.corps{
+    width: 320px;
+    background: linear-gradient(60deg, white, rgb(92, 92, 91));
+    height: 360px;
+    padding: 2px;
+    border-radius: 25px;
+}
+
+header{
+    color: rgb(2, 2, 83);
+}
+
+header p{
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+#couleur{
+    border-radius: 15px;
+    display: block;
+    height: 150px;
+    margin: 10px;
+}
+
+.choix{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.choix button{
+    margin: 2px;
+    background-color: rgb(73, 73, 73);
+    padding: 10px;
+    border-radius: 5px;
+    width: 100px;
+    color: aliceblue;
+    font-weight: bold;
+}
+button:focus{
+    animation-duration: 0.1s;
+}
+
+.score{
+    margin: 2px;
+}
