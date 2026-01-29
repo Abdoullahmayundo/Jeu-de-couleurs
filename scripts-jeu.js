@@ -1,6 +1,7 @@
 // Déclaration des variables
-let Reponse='Danger'
 let score=0
+let questioncont=0
+const Maxquestion=10
 
   // declaration du tableaux
 const colors = [
@@ -108,24 +109,43 @@ const colors = [
 
 // utilisation du DOM
 var AfficherScore = document.querySelector("#score")
-let Choix=document.querySelectorAll("button")
 var Bgcolor=document.querySelector("#couleur")
+let bouttons=document.querySelectorAll(".answers")
+const resultMessage=document.getElementById("resultatMessage")
+const actionBtn=document.getElementById("actionBtn")
+const game=document.getElementById("corps")
+const Message=document.getElementById("MessageDeFin")
 
+
+// utilisation de la bouton du final
+actionBtn.addEventListener("click", ()=>{
+    game.style.filter="none"
+    Message.style.display="none"
+    if(score>=6){
+        Niveau2()
+    }Niveau1()
+})
+
+    //fonction récommencer
+function Niveau1() {
+    score=0
+    questioncont=0
+    AfficherScore.textContent=score
+    resultMessage.textContent=""
+    actionBtn.style.display="none"
+    bouttons.forEach(button=>{
+        button.style.display="inline-block"
+    })
+    changeColor()
+}
 
 // fonction changer la couleur
 function changeColor() {
-    // changement de la couleur
 
         //choix du couleur au hasard
     const randomIndex=Math.floor(Math.random()*colors.length)
     const randomcolor=colors[randomIndex].color
     Bgcolor.style.backgroundColor=randomcolor
-
-    //choix du bouttons
-
-        // appel au DOM
-    let bouttons=document.querySelectorAll(".answers")
-
         // choix du boutton pour la bonne réponse
     const reponseCorrectIndex=Math.floor(Math.random()*bouttons.length)
 
@@ -142,19 +162,59 @@ function changeColor() {
     })
 }
 
+    // fonction réinitialisation du bouton apres le clique sur le bouton
+function resetButtons() {
+  bouttons.forEach(button => {
+    button.classList.remove("correct", "wrong");
+    button.disabled = false;
+  });
+}
 
-Choix.forEach(button => {
+
+    // fonction du fin de jeux
+function FinDuJeu() {
+    game.style.filter="blur(5px)"
+    Message.style.display="flex"
+    bouttons.forEach(button=>button.style.display="none")
+    if(score>=8){
+        resultMessage.textContent="Félicitations, vous avez un niveau élevé"+score+"/10"
+        actionBtn.textContent="suivant"
+    }else if(score>=6){
+        resultMessage.textContent="Félicitations, vous avez un niveau bas"+score+"/10"
+        actionBtn.textContent="suivant"
+    }else {
+        resultMessage.textContent="Ouft, votre niveau est trop bas "+score+"/10"
+        actionBtn.textContent="récommencer"
+    }actionBtn.style.display="inline-block"
+}
+
+    // fonctionnement du programme complet
+bouttons.forEach(button => {
     button.addEventListener("click", () =>{
+            //bloquer les clics
+        bouttons.forEach(b=>b.disabled=true)
+            //corps du programme et verification du réponse
         if(button.dataset.correct==="true"){
-            let b
+            button.classList.add("correct");
             AfficherScore=document.querySelector("#score")
             score++
             AfficherScore.textContent=score
             console.log("bonne réponse")
         }else{
-                console.log("mauvaise réponse")
+            button.classList.add("wrong");
+            console.log("mauvaise réponse")
         }
+            // compteur des quetions de l'utilisateur
+            questioncont++
+        setTimeout(() => {
+        resetButtons();
+            if(questioncont===Maxquestion){
+                FinDuJeu()
+            }else{
         changeColor()
+            }
+        }, 500)
+
     })
 })
 changeColor()

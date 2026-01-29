@@ -7,13 +7,21 @@
     <link rel="stylesheet" href="design-jeu.css">
 </head>
 <body>
-    <div class="corps">
+    <div id="MessageDeFin">
+        <div class="Message">
+            <p id="resultatMessage">Votre niveau est bas</p>
+            <button id="actionBtn">Recommencer</button>
+        </div>
+    </div>
+    <div id="corps">
         <header>
             <h1 id="titre">Jeu des couleurs</h1>
             <p class="text">Quelle est la signification de cette couleur ?</p>
         </header>
-
-        <div id="couleur"></div>
+        
+        <section>
+            <div id="couleur"></div>
+        </section>
 
         <div class="choix">
             <button class="answers"></button>
