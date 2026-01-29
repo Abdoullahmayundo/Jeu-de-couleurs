@@ -122,7 +122,7 @@ actionBtn.addEventListener("click", ()=>{
     game.style.filter="none"
     Message.style.display="none"
     if(score>=6){
-        Niveau2()
+        Niveau1()
     }Niveau1()
 })
 
